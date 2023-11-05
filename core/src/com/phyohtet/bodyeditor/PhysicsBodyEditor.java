@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.VisUI;
+import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisScrollPane;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.file.FileChooser;
@@ -26,6 +27,8 @@ import com.kotcrab.vis.ui.widget.file.FileChooser;
  * @author phyohtetarkar
  */
 public class PhysicsBodyEditor extends Game {
+
+    public static final  String version = "v1.0.0";
 
     SpriteBatch batch;
 
@@ -62,6 +65,9 @@ public class PhysicsBodyEditor extends Game {
         RigidBodyListAdapter adapter = new RigidBodyListAdapter(new Array<>());
         RigidBodiesListActor rigidBodiesListActor = new RigidBodiesListActor(adapter);
 
+        VisLabel versionLabel = new VisLabel(version);
+        versionLabel.setColor(1, 1, 1, 0.8f);
+
 
         VisTable rightPanel = new VisTable(false);
         rightPanel.top().left();
@@ -75,6 +81,9 @@ public class PhysicsBodyEditor extends Game {
         rightPanel.row();
         rightPanel.addSeparator();
         rightPanel.add(rigidBodiesListActor.getMainTable()).expandY().fill();
+        rightPanel.row();
+        rightPanel.addSeparator();
+        rightPanel.add(versionLabel).right().padRight(10).padTop(8).padBottom(8).expandX();
 
         table.add(optionsPanel).height(Canvas.OFFSET_Y).expandX().fillX().left().top();
         table.addSeparator(true);

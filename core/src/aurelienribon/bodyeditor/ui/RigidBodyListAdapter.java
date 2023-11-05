@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.util.adapter.ArrayAdapter;
+import com.kotcrab.vis.ui.widget.Tooltip;
 import com.kotcrab.vis.ui.widget.VisImage;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
@@ -35,6 +36,7 @@ public class RigidBodyListAdapter extends ArrayAdapter<RigidBodyModel, VisTable>
         subtitleLabel.setColor(1, 1, 1, 0.7f);
         subtitleLabel.setEllipsis(true);
 
+
         VisImage image = new VisImage();
         image.setScaling(Scaling.fit);
         String imgPath = item.getImagePath();
@@ -42,6 +44,7 @@ public class RigidBodyListAdapter extends ArrayAdapter<RigidBodyModel, VisTable>
 
 
         if (imgPath != null) {
+            new Tooltip.Builder(imgPath).target(subtitleLabel).build();
             if (item.isImagePathValid()) {
                 subtitleLabel.setText(imgPath);
                 try {

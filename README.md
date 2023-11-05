@@ -29,7 +29,6 @@ Features
 * Reference point location can be changed,
 * Visual configurable grid with snap-to-grid option,
 * Built-in collision tester! Throw balls at your body to test it,
-* Loader provided for LibGDX game framework,
 * Simple export format (JSON), to let you create your own loader for any framework in any language.
 
 Technologies

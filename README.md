@@ -4,12 +4,6 @@ Physics Body Editor is originally developed by [Aurelien Ribon](http://www.aurel
 **I rewrote entire SwingUI stuffs with Scene2d ([VisUI](https://github.com/kotcrab/vis-ui)) because of LWJGL3 AWT support issue([#6247](https://github.com/libgdx/libgdx/pull/6247)) and to work on Apple Silicon macs. Hope you guys useful on it ...**
 
 
-```bash
-# Run on Mac requires -XstartOnFirstThread
-
-java -jar -XstartOnFirstThread PhysicsBodyEditor-2.jar
-```
-
 <p align="center"><img src="readmeImgs/v2.png" alt="Physics Body Editor"/></p>
 
 Introduction
@@ -31,6 +25,22 @@ Features
 * Built-in collision tester! Throw balls at your body to test it,
 * Simple export format (JSON), to let you create your own loader for any framework in any language.
 
+Getting Started
+--------
+Download latest [Physics Body Editor](https://github.com/phyohtetarkar/box2d-editor-2/releases/download/latest/PhysicsBodyEditor-2.jar).
+
+* [Wiki](https://github.com/MovingBlocks/box2d-editor/wiki)
+* [YouTube](https://youtu.be/KASY91EiTXQ)
+
+```bash
+# Run on Mac requires -XstartOnFirstThread
+
+java -jar -XstartOnFirstThread PhysicsBodyEditor-2.jar
+```
+
+As for loader you can reuse old [LibGDX Java loader](https://github.com/julienvillegas/box2d-editor/blob/develop/downloads/BodyEditorLoader.java). Check out [LibGDX.info](https://libgdxinfo.wordpress.com/box2d-importing-complex-bodies/) for code sample!
+
+
 Technologies
 --------
 
@@ -39,8 +49,3 @@ The application uses the following technologies:
 * [LibGDX](https://github.com/libgdx/libgdx), the most awesome game dev library, for the rendering of the canvas area,
 * [Box2d](http://box2d.org/), as the embedded physics engine (available in Java thanks to libGDX),
 * [Farseer engine](https://github.com/tinco/Farseer-Physics), for its auto-trace and polygon decomposition algorithms.
-
-Getting Started
---------
-* [Wiki](https://github.com/MovingBlocks/box2d-editor/wiki)
-* [YouTube](https://youtu.be/KASY91EiTXQ)

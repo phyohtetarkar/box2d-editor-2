@@ -27,7 +27,7 @@ Features
 
 Getting Started
 --------
-Download latest [Physics Body Editor](https://github.com/phyohtetarkar/box2d-editor-2/releases/download/latest/PhysicsBodyEditor-2.jar).
+Download latest [Physics Body Editor](https://github.com/phyohtetarkar/box2d-editor-2/releases/latest/download/PhysicsBodyEditor-2.jar).
 
 * [Wiki](https://github.com/MovingBlocks/box2d-editor/wiki)
 * [YouTube](https://youtu.be/KASY91EiTXQ)

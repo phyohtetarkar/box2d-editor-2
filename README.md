@@ -1,7 +1,7 @@
 # Physics Body Editor
 Physics Body Editor is originally developed by [Aurelien Ribon](http://www.aurelienribon.com/) and maintained by [MovingBlocks](https://github.com/MovingBlocks/box2d-editor) for libGDX loader.
 
-**I rewrote entire SwingUI stuffs with Scene2d ([VisUI](https://github.com/kotcrab/vis-ui)) because of LWJGL3 AWT support issue and to work on Apple Silicon macs. Hope you guys useful on it ...**
+**I rewrote entire SwingUI stuffs with Scene2d ([VisUI](https://github.com/kotcrab/vis-ui)) because of LWJGL3 AWT support issue([#6247](https://github.com/libgdx/libgdx/pull/6247)) and to work on Apple Silicon macs. Hope you guys useful on it ...**
 
 
 ```bash

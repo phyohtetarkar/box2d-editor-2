@@ -10,8 +10,8 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.HdpiUtils;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -28,7 +28,7 @@ import com.kotcrab.vis.ui.widget.file.FileChooser;
  */
 public class PhysicsBodyEditor extends Game {
 
-    public static final  String version = "v1.0.0";
+    public static final  String version = "v1.0.1";
 
     SpriteBatch batch;
 
@@ -52,47 +52,13 @@ public class PhysicsBodyEditor extends Game {
         VisTable table = new VisTable(false);
         table.setFillParent(true);
 
-        OptionsActor optionsActor = new OptionsActor();
-        VisScrollPane optionsPanel = new VisScrollPane(optionsActor);
-        optionsPanel.setFadeScrollBars(false);
-        optionsPanel.getListeners().forEach(eventListener -> {
-            if (eventListener instanceof ActorGestureListener) {
-                return;
-            }
-            optionsPanel.removeListener(eventListener);
-        });
+        Actor optionsPanel = buildOptionsPanel();
 
-        RigidBodyListAdapter adapter = new RigidBodyListAdapter(new Array<>());
-        RigidBodiesListActor rigidBodiesListActor = new RigidBodiesListActor(adapter);
-
-        VisLabel versionLabel = new VisLabel(version);
-        versionLabel.setColor(1, 1, 1, 0.8f);
-
-
-        VisTable rightPanel = new VisTable(false);
-        rightPanel.top().left();
-        rightPanel.add(new HeadingActor()).fill();
-        rightPanel.row();
-        rightPanel.addSeparator();
-        rightPanel.add(new ProjectActor()).fill();
-        rightPanel.row();
-        rightPanel.addSeparator();
-        rightPanel.add(new RigidBodiesListHeaderActor(adapter)).fill();
-        rightPanel.row();
-        rightPanel.addSeparator();
-        rightPanel.add(rigidBodiesListActor.getMainTable()).expandY().fill();
-        rightPanel.row();
-        rightPanel.addSeparator();
-        rightPanel.add(versionLabel).right().padRight(10).padTop(8).padBottom(8).expandX();
+        Actor rightPanel = buildRightPanel();
 
         table.add(optionsPanel).height(Canvas.OFFSET_Y).expandX().fillX().left().top();
         table.addSeparator(true);
         table.add(rightPanel).width(Canvas.OFFSET_X).top().expandY().fill();
-
-        Drawable bg = VisUI.getSkin().getDrawable("window-bg");
-        optionsActor.setBackground(bg);
-        rightPanel.setBackground(bg);
-
 
         stage.addActor(table);
 
@@ -126,5 +92,38 @@ public class PhysicsBodyEditor extends Game {
         stage.dispose();
         batch.dispose();
         VisUI.dispose();
+    }
+
+    private Actor buildOptionsPanel() {
+        return new OptionsActor();
+    }
+
+    private Actor buildRightPanel() {
+        RigidBodyListAdapter adapter = new RigidBodyListAdapter(new Array<>());
+        RigidBodiesListActor rigidBodiesListActor = new RigidBodiesListActor(adapter);
+
+        VisLabel versionLabel = new VisLabel(version);
+        versionLabel.setColor(1, 1, 1, 0.8f);
+
+        VisTable rightPanel = new VisTable(false);
+        rightPanel.top().left();
+        rightPanel.add(new HeadingActor()).fill();
+        rightPanel.row();
+        rightPanel.addSeparator();
+        rightPanel.add(new ProjectActor()).fill();
+        rightPanel.row();
+        rightPanel.addSeparator();
+        rightPanel.add(new RigidBodiesListHeaderActor(adapter)).fill();
+        rightPanel.row();
+        rightPanel.addSeparator();
+        rightPanel.add(rigidBodiesListActor.getMainTable()).expandY().fill();
+        rightPanel.row();
+        rightPanel.addSeparator();
+        rightPanel.add(versionLabel).right().padRight(10).padTop(8).padBottom(8).expandX();
+
+        Drawable bg = VisUI.getSkin().getDrawable("window-bg");
+        rightPanel.setBackground(bg);
+
+        return rightPanel;
     }
 }

@@ -29,6 +29,9 @@ public class TestInputProcessor extends InputAdapter {
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
         if (model == null) return false;
 
+        Vector2 bound = Canvas.getCanvasBound(x, y);
+        if (bound.isZero()) return false;
+
         Vector2 p = canvas.screenToWorld(x, y);
         screen.ballThrowP1 = p;
         screen.ballThrowP2 = p;
@@ -42,6 +45,9 @@ public class TestInputProcessor extends InputAdapter {
 
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
         if (model == null) return false;
+
+        Vector2 bound = Canvas.getCanvasBound(x, y);
+        if (bound.isZero()) return false;
 
         Vector2 p1 = screen.ballThrowP1;
         Vector2 p2 = screen.ballThrowP2;
@@ -59,6 +65,9 @@ public class TestInputProcessor extends InputAdapter {
 
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
         if (model == null) return false;
+
+        Vector2 bound = Canvas.getCanvasBound(x, y);
+        if (bound.isZero()) return false;
 
         Vector2 p = canvas.screenToWorld(x, y);
         screen.ballThrowP2 = p;

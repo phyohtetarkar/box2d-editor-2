@@ -2,21 +2,24 @@ package aurelienribon.bodyeditor.ui;
 
 import aurelienribon.bodyeditor.Settings;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.kotcrab.vis.ui.widget.VisCheckBox;
-import com.kotcrab.vis.ui.widget.VisLabel;
-import com.kotcrab.vis.ui.widget.VisSelectBox;
-import com.kotcrab.vis.ui.widget.VisTable;
-
-import java.util.Set;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.kotcrab.vis.ui.VisUI;
+import com.kotcrab.vis.ui.widget.*;
 
 /**
  * @author phyohtetarkar
  */
-public class OptionsActor extends VisTable {
+public class OptionsActor extends VisScrollPane {
 
     public OptionsActor() {
-        super(true);
+        super(new VisTable(true));
+
+        VisTable table = (VisTable) getActor();
+
         VisCheckBox cbDrawBackground = new VisCheckBox("Draw background image", Settings.isImageDrawn);
         VisCheckBox cbDrawConvexPolygon = new VisCheckBox("Draw convex polygons", Settings.isPolygonDrawn);
         VisCheckBox cbDrawGridWithGap = new VisCheckBox("Draw grid with gap", Settings.isGridShown);
@@ -69,19 +72,45 @@ public class OptionsActor extends VisTable {
             }
         });
 
-        left().top().pad(12);
+        table.left().top().pad(12);
 
         VisLabel label = new VisLabel("Options");
-        add(label).left().colspan(3);
-        row();
-        add(cbDrawBackground).left().padTop(4);
-        add(cbDrawConvexPolygon).left();
-        add(cbDrawGridWithGap).left();
-        add(selectBox).left();
-        row();
-        add(cbDrawShapes).left();
-        add(cbDebugPhysics).left();
-        add(cbEnableSnapGrid).colspan(2).left();
+        table.add(label).left().colspan(3);
+        table.row();
+        table.add(cbDrawBackground).left().padTop(4);
+        table.add(cbDrawConvexPolygon).left();
+        table.add(cbDrawGridWithGap).left();
+        table.add(selectBox).left();
+        table.row();
+        table.add(cbDrawShapes).left();
+        table.add(cbDebugPhysics).left();
+        table.add(cbEnableSnapGrid).colspan(2).left();
+
+        Drawable bg = VisUI.getSkin().getDrawable("window-bg");
+        table.setBackground(bg);
+
+        pack();
+
+        addListener(new InputListener() {
+            @Override
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                Stage stage = event.getStage();
+                boolean hovered = hit(x ,y, isTouchable()) != null;
+                if (hasScrollFocus() && stage != null && !hovered) {
+                    stage.setScrollFocus(null);
+                }
+            }
+
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                Stage stage = event.getStage();
+                boolean hovered = hit(x ,y, isTouchable()) != null;
+                if (!hasScrollFocus() && stage != null && hovered) {
+                    stage.setScrollFocus(OptionsActor.this);
+                }
+
+            }
+        });
     }
 
 }

@@ -38,6 +38,10 @@ public class EditionInputProcessor extends InputAdapter {
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
         if (model == null) return false;
 
+        Vector2 bound = Canvas.getCanvasBound(x, y);
+
+        if (bound.isZero()) return false;
+
         draggedPoint = screen.nearestPoint;
 
         if (draggedPoint == null) {
@@ -64,6 +68,9 @@ public class EditionInputProcessor extends InputAdapter {
 
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
         if (model == null) return false;
+
+        Vector2 bound = Canvas.getCanvasBound(x, y);
+        if (bound.isZero()) return false;
 
         if (draggedPoint != null) {
             draggedPoint = null;
@@ -96,6 +103,9 @@ public class EditionInputProcessor extends InputAdapter {
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
         if (model == null) return false;
 
+        Vector2 bound = Canvas.getCanvasBound(x, y);
+        if (bound.isZero()) return false;
+
         if (draggedPoint != null) {
             Vector2 p = canvas.alignedScreenToWorld(x, y);
             model.clearPhysics();
@@ -120,6 +130,9 @@ public class EditionInputProcessor extends InputAdapter {
     public boolean mouseMoved(int x, int y) {
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
         if (model == null) return false;
+
+        Vector2 bound = Canvas.getCanvasBound(x, y);
+        if (bound.isZero()) return false;
 
         // Nearest point computation
 

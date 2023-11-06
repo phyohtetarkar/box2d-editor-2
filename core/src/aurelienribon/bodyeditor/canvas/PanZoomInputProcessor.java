@@ -22,6 +22,9 @@ public class PanZoomInputProcessor extends InputAdapter {
     public boolean touchDown(int x, int y, int pointer, int button) {
         if (button != Buttons.RIGHT) return false;
 
+        Vector2 bound = Canvas.getCanvasBound(x, y);
+        if (bound.isZero()) return false;
+
         Vector2 p = canvas.screenToWorld(x, y);
         lastTouch.set(p);
         return false;
@@ -30,6 +33,8 @@ public class PanZoomInputProcessor extends InputAdapter {
     @Override
     public boolean touchDragged(int x, int y, int pointer) {
         if (!Gdx.input.isButtonPressed(Buttons.RIGHT)) return false;
+        Vector2 bound = Canvas.getCanvasBound(x, y);
+        if (bound.isZero()) return false;
 
         Vector2 p = canvas.screenToWorld(x, y);
         Vector2 delta = new Vector2(p).sub(lastTouch);
@@ -41,6 +46,9 @@ public class PanZoomInputProcessor extends InputAdapter {
 
     @Override
     public boolean scrolled(float amountX, float amountY) {
+        Vector2 bound = Canvas.getCanvasBound(Gdx.input.getX(), Gdx.input.getY());
+        if (bound.x == 0 || bound.y == 0) return false;
+
         if (zoomLevel == zoomLevels[0] && amountY < 0) {
             zoomLevel = zoomLevels[1];
         } else if (zoomLevel == zoomLevels[zoomLevels.length - 1] && amountY > 0) {

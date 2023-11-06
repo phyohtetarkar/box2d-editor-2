@@ -170,10 +170,30 @@ public class Canvas extends ScreenAdapter {
     // Public API
     // -------------------------------------------------------------------------
 
+    public static Vector2 getCanvasBound(float x, float y) {
+        Vector2 vec2 = new Vector2(1, 1);
+        int w = Gdx.graphics.getWidth() - OFFSET_X;
+        if (x >= w) {
+           vec2.x = 0;
+        }
+        if (y <= OFFSET_Y) {
+            vec2.y = 0;
+        }
+
+        return vec2;
+    };
+
     public Vector2 screenToWorld(int x, int y) {
         int w = Gdx.graphics.getWidth() - OFFSET_X;
         int h = Gdx.graphics.getHeight() - OFFSET_Y;
-        Vector3 v3 = worldCamera.unproject(new Vector3(x, y, 0), 0, 0, w, h);
+        Vector2 bound = getCanvasBound(x, y);
+        if (bound.x == 0) {
+            x = w - 5;
+        }
+        if (bound.y == 0) {
+            y = OFFSET_Y + 4;
+        }
+        Vector3 v3 = worldCamera.unproject(new Vector3(x, y, 0), 0, 0,w, h);
         return new Vector2(v3.x, v3.y);
     }
 

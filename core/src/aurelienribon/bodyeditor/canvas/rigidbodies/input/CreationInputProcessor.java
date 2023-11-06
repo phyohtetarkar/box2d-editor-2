@@ -34,6 +34,10 @@ public class CreationInputProcessor extends InputAdapter {
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
         if (model == null) return false;
 
+        Vector2 bound = Canvas.getCanvasBound(x, y);
+
+        if (bound.isZero()) return false;
+
         List<ShapeModel> shapes = model.getShapes();
         ShapeModel lastShape = shapes.isEmpty() ? null : shapes.get(shapes.size() - 1);
 

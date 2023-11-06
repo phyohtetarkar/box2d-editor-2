@@ -38,7 +38,7 @@ The application uses the following technologies:
 
 * [LibGDX](https://github.com/libgdx/libgdx), the most awesome game dev library, for the rendering of the canvas area,
 * [Box2d](http://box2d.org/), as the embedded physics engine (available in Java thanks to libGDX),
-* [Farseer engine](http://farseerphysics.codeplex.com/), for its auto-trace and polygon decomposition algorithms.
+* [Farseer engine](https://github.com/tinco/Farseer-Physics), for its auto-trace and polygon decomposition algorithms.
 
 Getting Started
 --------
